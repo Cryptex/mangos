@@ -5540,7 +5540,9 @@ bool Unit::HandleDummyAuraProc(Unit *pVictim, uint32 damage, Aura* triggeredByAu
                 {
                     triggered_spell_id = 54968;
                     basepoints0 = triggerAmount*damage/100;
-                    break;
+					if( procSpell->SpellFamilyFlags & 0x00000000C0000000LL)
+						basepoints0 = damage;
+					break;
                 }
             }
             break;
