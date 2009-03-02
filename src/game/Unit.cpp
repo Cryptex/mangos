@@ -5535,13 +5535,25 @@ bool Unit::HandleDummyAuraProc(Unit *pVictim, uint32 damage, Aura* triggeredByAu
                     basepoints0 = triggerAmount*damage/100;
                     break;
                 }
+				// Glyph of Spiritual Attunement
+				case 54924:
+				{
+					// if healed by another unit (pVictim)
+                    if(this == pVictim)
+                        return false;
+					
+					target = this;
+					triggered_spell_id = 55111;
+					basepoints0 = triggerAmount*damage/100;
+					break;
+				}
                 // Glyph of Holy Light
                 case 54937:
                 {
-                    triggered_spell_id = 54968;
+                    if( procSpell->SpellFamilyFlags & 0x00000000C0000000LL)
+						return false;
+					triggered_spell_id = 54968;
                     basepoints0 = triggerAmount*damage/100;
-					if( procSpell->SpellFamilyFlags & 0x00000000C0000000LL)
-						basepoints0 = damage;
 					break;
                 }
             }
